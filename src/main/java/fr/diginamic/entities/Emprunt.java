@@ -35,6 +35,21 @@ public class Emprunt {
     @JoinColumn(name="ID_CLIENT")
     private Client client;
 
+    public Emprunt() {
+
+    }
+
+    public Emprunt(LocalDate dateDebut, LocalDate dateFin, Integer delai, Set<Livre> livres, Client client) {
+        super();
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.delai = delai;
+        this.livres = livres;
+        this.client = client;
+    }
+
+
+
     public Integer getId() {
         return id;
     }
