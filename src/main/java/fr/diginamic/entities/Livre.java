@@ -1,15 +1,15 @@
 package fr.diginamic.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.w3c.dom.ls.LSOutput;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "livre")
 public class Livre {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -18,6 +18,13 @@ public class Livre {
 
     @Column(name = "AUTEUR", nullable = false, length = 50)
     private String auteur;
+
+    @ManyToMany
+    @JoinTable(name = "COMPO",
+            joinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ID_EMP", referencedColumnName = "ID")
+    )
+    private Set<Emprunt> emprunts;
 
     public Integer getId() {
         return id;
@@ -56,4 +63,6 @@ public class Livre {
         this.titre = titre;
         this.auteur = auteur;
     }
+
+
 }

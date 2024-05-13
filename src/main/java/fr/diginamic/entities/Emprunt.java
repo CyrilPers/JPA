@@ -1,16 +1,15 @@
 package fr.diginamic.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Entity
 @Table(name = "emprunt")
 public class Emprunt {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -23,8 +22,17 @@ public class Emprunt {
     @Column(name = "DELAI")
     private Integer delai;
 
-    @Column(name = "ID_CLIENT", nullable = false)
-    private Integer idClient;
+
+    @ManyToMany
+    @JoinTable(name = "COMPO",
+            joinColumns = @JoinColumn(name = "ID_EMP", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID")
+    )
+    private Set<Livre> livres;
+
+    @ManyToOne
+    @JoinColumn(name="ID_CLIENT")
+    private Client client;
 
     public Integer getId() {
         return id;
@@ -58,12 +66,24 @@ public class Emprunt {
         this.delai = delai;
     }
 
-    public Integer getIdClient() {
-        return idClient;
+    public Set<Livre> getLivres() {
+        return livres;
     }
 
-    public void setIdClient(Integer idClient) {
-        this.idClient = idClient;
+    public void setLivres(Set<Livre> livres) {
+        this.livres = livres;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    @Override
+    public String toString() {
+        return "Emprunt [id = " + id + ", date_debut = " + dateDebut +  " , date_fin = " + dateFin + " ] ";
+    }
 }

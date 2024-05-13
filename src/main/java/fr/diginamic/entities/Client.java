@@ -2,6 +2,9 @@ package fr.diginamic.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "client")
 public class Client {
@@ -15,6 +18,9 @@ public class Client {
 
     @Column(name = "PRENOM", nullable = false, length = 50)
     private String prenom;
+
+    @OneToMany(mappedBy="client")
+    private Set<Emprunt> emprunts;
 
     public Integer getId() {
         return id;
@@ -40,4 +46,11 @@ public class Client {
         this.prenom = prenom;
     }
 
+    public Set<Emprunt> getEmprunts() {
+        return emprunts;
+    }
+
+    public void setEmprunts(Set<Emprunt> emprunts) {
+        this.emprunts = emprunts;
+    }
 }
