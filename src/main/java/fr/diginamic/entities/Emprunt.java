@@ -3,6 +3,7 @@ package fr.diginamic.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -14,10 +15,10 @@ public class Emprunt {
     private Integer id;
 
     @Column(name = "DATE_DEBUT", nullable = false)
-    private Instant dateDebut;
+    private LocalDate dateDebut;
 
     @Column(name = "DATE_FIN")
-    private Instant dateFin;
+    private LocalDate dateFin;
 
     @Column(name = "DELAI")
     private Integer delai;
@@ -42,19 +43,19 @@ public class Emprunt {
         this.id = id;
     }
 
-    public Instant getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Instant dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Instant getDateFin() {
+    public LocalDate getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Instant dateFin) {
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
     }
 
