@@ -17,19 +17,26 @@ public class ConnexionJpa {
             System.out.println(em);
             em.getTransaction().begin();
 //            Livre livre = em.find(Livre.class, 1);
+//            Livre livre1 = new Livre("Test titre", "test auteur");
+//            em.persist(livre1);
             Emprunt emprunt = em.find(Emprunt.class, 1);
             if (emprunt != null) {
                 ArrayList<Livre> livresEmpruntId1 = new ArrayList<>(emprunt.getLivres());
                 System.out.println(livresEmpruntId1);
-                livresEmpruntId1.forEach(livre -> System.out.println(livre.toString()));
-                em.getTransaction().commit();
+                if (livresEmpruntId1.size() > 0) {
+                    livresEmpruntId1.forEach(livre -> System.out.println(livre.toString()));
+                }
 
             }
             Client client = em.find(Client.class, 1);
             if (client != null) {
                 ArrayList<Emprunt> empruntsClient = new ArrayList<>(client.getEmprunts());
+                if (empruntsClient.size() > 0) {
                 empruntsClient.forEach(emp -> System.out.println(emp.toString()));
+                }
             }
+            em.getTransaction().commit();
         }
+
     }
 }
