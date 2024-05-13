@@ -42,4 +42,8 @@ public class Livre {
         this.auteur = auteur;
     }
 
+    public Livre(String titre, String auteur) {
+        this.titre = titre;
+        this.auteur = auteur;
+    }
 }
