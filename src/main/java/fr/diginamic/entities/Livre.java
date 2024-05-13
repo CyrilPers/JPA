@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.w3c.dom.ls.LSOutput;
 
 @Entity
 @Table(name = "livre")
@@ -44,6 +45,11 @@ public class Livre {
 
     public Livre() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Livre [titre = " + titre + ", auteur = " + auteur + " ] ";
     }
 
     public Livre(String titre, String auteur) {

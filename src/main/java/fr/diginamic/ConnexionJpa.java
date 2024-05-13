@@ -12,8 +12,7 @@ public class ConnexionJpa {
             System.out.println(em);
 
             Livre livre = em.find(Livre.class, 1);
-            System.out.println(livre.getTitre());
-            System.out.println(livre.getAuteur());
+            System.out.println(livre.toString());
         }
     }
 }
