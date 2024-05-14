@@ -10,13 +10,13 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    String nom;
-    String prenom;
-    LocalDate dateNaissance;
+    private String nom;
+    private String prenom;
+    private LocalDate dateNaissance;
 
     @ManyToMany
     @JoinTable(name = "COMPO",
-            joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "numero")
     )
     private Set<Compte> comptes;

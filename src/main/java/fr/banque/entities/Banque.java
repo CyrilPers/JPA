@@ -13,7 +13,7 @@ public class Banque {
     String nom;
 
     @OneToMany(mappedBy = "banque")
-    Set<Client> clients;
+    private Set<Client> clients;
 
     public Banque(String nom) {
         this.nom = nom;

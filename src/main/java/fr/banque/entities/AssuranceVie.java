@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class AssuranceVie extends Compte{
-    double taux;
-    LocalDate dateFin;
+    private double taux;
+    private LocalDate dateFin;
 
     public AssuranceVie(String numero, double solde, Set<Client> clients, Set<Operation> operations) {
         super(numero, solde, clients, operations);

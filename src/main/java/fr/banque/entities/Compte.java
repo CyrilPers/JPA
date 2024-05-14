@@ -7,18 +7,19 @@ import java.util.Set;
 @Entity
 public abstract class Compte {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="numero", nullable = false)
-    String numero;
-    double solde;
+    private String numero;
+    private double solde;
 
     @ManyToMany
     @JoinTable(name = "COMPO",
             joinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "numero"),
-            inverseJoinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "id")
+            inverseJoinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID")
     )
     private Set<Client> clients;
     @OneToMany(mappedBy = "compte")
-    Set<Operation> operations;
+    private Set<Operation> operations;
 
 
     public Compte(String numero, double solde, Set<Client> clients, Set<Operation> operations) {

@@ -3,13 +3,17 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
 public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    LocalDate date;
-    double montant;
-    String motif;
+    private int id;
+
+    private LocalDate date;
+    private double montant;
+    private String motif;
+
     @ManyToOne
     @JoinColumn(name="id_operation")
     private Compte compte;
@@ -19,6 +23,10 @@ public class Operation {
         this.montant = montant;
         this.motif = motif;
         this.compte = compte;
+    }
+
+    public Operation() {
+
     }
 
     public LocalDate getDate() {
