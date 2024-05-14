@@ -10,15 +10,15 @@ public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Integer id;
+    protected Integer id;
     @Column(name = "NUM")
-    private String numero;
+    protected String numero;
     @Column(name = "SOLDE")
-    private double solde;
+    protected double solde;
     @OneToMany(mappedBy = "compte")
-    private Set<Operation> operations;
+    protected Set<Operation> operations;
     @ManyToMany(mappedBy = "comptes")
-    private Set<Client> clients;
+    protected Set<Client> clients;
 
     public Compte() {
         super();

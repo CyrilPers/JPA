@@ -17,16 +17,16 @@ public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Integer id;
+    protected Integer id;
     @Column(name = "DATE")
-    private LocalDateTime date;
+    protected LocalDateTime date;
     @Column(name = "MONTANT")
-    private double montant;
+    protected double montant;
     @Column(name = "MOTIF")
-    private String motif;
+    protected String motif;
     @ManyToOne
     @JoinColumn(name = "ID_COMPTE")
-    private Compte compte;
+    protected Compte compte;
 
     public Operation() {
         super();
