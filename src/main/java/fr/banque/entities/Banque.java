@@ -4,17 +4,23 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+@Entity
 public class Banque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
     String nom;
+
     @OneToMany(mappedBy = "banque")
     Set<Client> clients;
 
     public Banque(String nom) {
         this.nom = nom;
+    }
+
+    public Banque() {
+
     }
 
     public Integer getId() {

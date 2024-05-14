@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,7 @@ public class Client {
     String prenom;
     LocalDate dateNaissance;
 
+    @ManyToMany
     @JoinTable(name = "COMPO",
             joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "numero")
@@ -33,6 +35,10 @@ public class Client {
         this.comptes = comptes;
         this.banque = banque;
         this.adresse = adresse;
+    }
+
+    public Client() {
+
     }
 
     public Integer getId() {

@@ -1,15 +1,16 @@
 package fr.banque.entities;
 
-import fr.diginamic.entities.Livre;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
+@Entity
 public abstract class Compte {
     @Id
-    @Column(nullable = false)
+    @Column(name="numero", nullable = false)
     String numero;
     double solde;
+
     @ManyToMany
     @JoinTable(name = "COMPO",
             joinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "numero"),
@@ -25,6 +26,10 @@ public abstract class Compte {
         this.solde = solde;
         this.clients = clients;
         this.operations = operations;
+    }
+
+    public Compte() {
+
     }
 
 
