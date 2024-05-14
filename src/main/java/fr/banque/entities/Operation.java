@@ -1,39 +1,58 @@
 package fr.banque.entities;
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "OPERATION")
 public class Operation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private int id;
-
-    private LocalDate date;
+    @Column(name = "ID")
+    private Integer id;
+    @Column(name = "DATE")
+    private LocalDateTime date;
+    @Column(name = "MONTANT")
     private double montant;
+    @Column(name = "MOTIF")
     private String motif;
-
     @ManyToOne
-    @JoinColumn(name="id_operation")
+    @JoinColumn(name = "ID_COMPTE")
     private Compte compte;
 
-    public Operation(LocalDate date, double montant, String motif, Compte compte) {
+    public Operation() {
+        super();
+    }
+
+    public Operation(LocalDateTime date, double montant, String motif, Compte compte) {
+        super();
         this.date = date;
         this.montant = montant;
         this.motif = motif;
         this.compte = compte;
     }
 
-    public Operation() {
-
+    public Integer getId() {
+        return id;
     }
 
-    public LocalDate getDate() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -60,4 +79,11 @@ public class Operation {
     public void setCompte(Compte compte) {
         this.compte = compte;
     }
+
+    @Override
+    public String toString() {
+        return "Operation [id=" + id + ", date=" + date + ", montant=" + montant + ", motif=" + motif + ", compte="
+                + compte + "]";
+    }
+
 }

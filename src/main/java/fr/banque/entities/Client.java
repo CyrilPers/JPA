@@ -1,44 +1,62 @@
 package fr.banque.entities;
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.Set;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 @Entity
+@Table(name = "CLIENT")
 public class Client {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "ID")
     private Integer id;
+    @Column(name = "NOM")
     private String nom;
+    @Column(name = "PRENOM")
     private String prenom;
+    @Column(name = "DATE_NAISSANCE")
     private LocalDate dateNaissance;
-
-    @ManyToMany
-    @JoinTable(name = "COMPO",
-            joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "numero")
-    )
-    private Set<Compte> comptes;
-
-    @ManyToOne
-    @JoinColumn(name="ID_BANQUE")
-    Banque banque;
-
     @Embedded
     private Adresse adresse;
+    @ManyToOne
+    @JoinColumn(name = "ID_BANQUE")
+    private Banque banque;
+    @ManyToMany
+    @JoinTable(name = "CLIENT_COMPTE_POSSESSION", joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID"))
+    private Set<Compte> comptes;
 
-    public Client(String nom, String prenom, LocalDate dateNaissance, Set<Compte> comptes, Banque banque, Adresse adresse) {
+    public Client(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
-        this.dateNaissance = dateNaissance;
-        this.comptes = comptes;
-        this.banque = banque;
-        this.adresse = adresse;
     }
 
     public Client() {
+        this("", "", null, null, null);
+    }
 
+    public Client(String nom, String prenom, LocalDate dateNaissance) {
+        this(nom, prenom, dateNaissance, null, null);
+    }
+
+    public Client(String nom, String prenom, LocalDate dateNaissance, Adresse adresse, Banque banque) {
+        super();
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.adresse = adresse;
+        this.banque = banque;
     }
 
     public Integer getId() {
@@ -73,13 +91,12 @@ public class Client {
         this.dateNaissance = dateNaissance;
     }
 
-
-    public Set<Compte> getComptes() {
-        return comptes;
+    public Adresse getAdresse() {
+        return adresse;
     }
 
-    public void setComptes(Set<Compte> comptes) {
-        this.comptes = comptes;
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 
     public Banque getBanque() {
@@ -90,11 +107,17 @@ public class Client {
         this.banque = banque;
     }
 
-    public Adresse getAdresse() {
-        return adresse;
+    public Set<Compte> getComptes() {
+        return comptes;
     }
 
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
+    public void setComptes(Set<Compte> comptes) {
+        this.comptes = comptes;
+    }
+
+    @Override
+    public String toString() {
+        return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
+                + ", adresse=" + adresse + ", banque=" + banque + "]";
     }
 }

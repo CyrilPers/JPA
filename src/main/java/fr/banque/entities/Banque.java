@@ -1,26 +1,41 @@
 package fr.banque.entities;
 
-import jakarta.persistence.*;
-
 import java.util.Set;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 @Entity
+@Table(name = "BANQUE")
 public class Banque {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "ID")
     private Integer id;
-    String nom;
-
+    @Column(name = "NOM", length = 50, nullable = false, unique = true)
+    private String nom;
     @OneToMany(mappedBy = "banque")
     private Set<Client> clients;
 
+    public Banque() {
+        super();
+    }
+
     public Banque(String nom) {
+        super();
         this.nom = nom;
     }
 
-    public Banque() {
-
+    public Banque(String nom, Set<Client> clients) {
+        super();
+        this.nom = nom;
+        this.clients = clients;
     }
 
     public Integer getId() {
@@ -47,8 +62,9 @@ public class Banque {
         this.clients = clients;
     }
 
-    public Banque(String nom, Set<Client> clients) {
-        this.nom = nom;
-        this.clients = clients;
+    @Override
+    public String toString() {
+        return "Banque [id=" + id + ", nom=" + nom + "]";
     }
+
 }

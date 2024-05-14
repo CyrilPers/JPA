@@ -1,26 +1,30 @@
 package fr.banque.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 @Embeddable
 public class Adresse {
-    int numero;
-    String rue;
-    String ville;
-    int codePostal;
 
-    public Adresse(int numero, String rue, String ville, int codePostal) {
-        this.numero = numero;
-        this.rue = rue;
-        this.ville = ville;
-        this.codePostal = codePostal;
-    }
+    @Column(name = "NUM")
+    private int numero;
+    @Column(name = "RUE")
+    private String rue;
+    @Column(name = "CP")
+    private int codePostal;
+    @Column(name = "VILLE")
+    private String ville;
 
     public Adresse() {
+        super();
+    }
 
+    public Adresse(int numero, String rue, int codePostal, String ville) {
+        super();
+        this.numero = numero;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
     }
 
     public int getNumero() {
@@ -39,6 +43,14 @@ public class Adresse {
         this.rue = rue;
     }
 
+    public int getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
+    }
+
     public String getVille() {
         return ville;
     }
@@ -47,11 +59,8 @@ public class Adresse {
         this.ville = ville;
     }
 
-    public int getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(int codePostal) {
-        this.codePostal = codePostal;
+    @Override
+    public String toString() {
+        return "Adresse [numero=" + numero + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
     }
 }
